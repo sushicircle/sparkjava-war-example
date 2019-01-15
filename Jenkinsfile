@@ -71,7 +71,7 @@ node("master") {
         doGenerateSubmoduleConfigurations: false,
         extensions: [[
           $class: 'RelativeTargetDirectory',
-          relativeTargetDir: '~/Documents/new'
+          relativeTargetDir: 'dir/injenkins'
         ]],
         submoduleCfg: [],
         userRemoteConfigs: [[
