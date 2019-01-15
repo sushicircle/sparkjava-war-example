@@ -70,7 +70,8 @@ node("master") {
         ]],
         doGenerateSubmoduleConfigurations: false,
         extensions: [[
-          $class: 'RelativeTargetDirectory'
+          $class: 'RelativeTargetDirectory',
+          relativeTargetDir: '~/Documents/new'
         ]],
         submoduleCfg: [],
         userRemoteConfigs: [[
