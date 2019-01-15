@@ -30,7 +30,7 @@ node("master") {
   sshagent([gitCredentials]) {
     properties([
       paramters([
-        choise(name: 'build_branch', choices: getBranches(gitrepo), description: 'source branceh')
+        choise(name: 'build_branch', choices: 'master\ndevelop', description: 'source branceh')
       ])
     ])
   }
