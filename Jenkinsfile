@@ -34,7 +34,7 @@ node("master) {
         branches: [[
           name: branch
         ]],
-        userRemoteConfigs: {{
+        userRemoteConfigs: [[
           credentialsId: gitCredentials,
           url: gitrepo
         ]]
