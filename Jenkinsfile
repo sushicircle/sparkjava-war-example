@@ -81,7 +81,7 @@ node("master") {
       ])
       }
       echo "workspace we copy from: ${WORKSPACE}"
-      sh 'sudo cp -vr ~/workspace/git\\ jenkinsfile\\ pipeline/dir/injenkins /home/milan/Documents/new'
+      sh 'yes | sudo cp -vr ~/workspace/git\\ jenkinsfile\\ pipeline/dir/injenkins /home/milan/Documents/new'
       sh 'sudo chown milan:milan /home/milan/Documents/new/injenkins'
     }
   } catch (e) {
