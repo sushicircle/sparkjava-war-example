@@ -40,7 +40,7 @@ node("master") {
     stage('checkout') {
       sshagent([gitCredentials]) {
         checkout([
-          $class: 'GITSCM',
+          $class: 'GitSCM',
           branches: [[
             name: 'master'
           ]],
