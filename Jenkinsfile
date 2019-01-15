@@ -27,19 +27,36 @@ def getBranches(gitrepo) {
 node("master") {
   echo "master node"
   
-  stage('checkout') {
-    sshagent([gitCredentials]) {
-      checkout([
-        $class: 'GITSCM',
-        branches: [[
-          name: branch
-        ]],
-        userRemoteConfigs: [[
-          credentialsId: gitCredentials,
-          url: gitrepo
-        ]]
+  sshagent([gitCredentials]) {
+    properties([
+      paramters([
+        choise(name: 'build_branch', choices: getBranches(gitrepo), description: 'source branceh')
       ])
+    ])
+  }
+  try {
+    notifyBuild('START')
+    try {
+      branch = params.build_branch
+    } catch (e) {
+      // do nothing, default to develop
     }
+    
+    //deleteDir()
+  
+    stage('checkout') {
+      sshagent([gitCredentials]) {
+        checkout([
+          $class: 'GITSCM',
+          branches: [[
+            name: branch
+          ]],
+          userRemoteConfigs: [[
+            credentialsId: gitCredentials,
+            url: gitrepo
+          ]]
+        ])
+      }
   }
   
   stage('check') {
