@@ -12,7 +12,7 @@ def getBranches(gitrepo) {
   
   proc.waitFor()
   
-  if(proc.exitValue() != 0 {
+  if(proc.exitValue() != 0) {
     println "Error, ${proc.err.txt}"
   } else {
     def gitbranches = proc.in.text.readLines().collect {
