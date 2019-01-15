@@ -6,7 +6,7 @@
   def branches       = 'origin/master'
 
 // retrieve branches
-def get Branches(gitrepo) {
+def getBranches(gitrepo) {
   def command   = "git ls-remote -h" + gitrepo
   def proc      = command.execute()
   
