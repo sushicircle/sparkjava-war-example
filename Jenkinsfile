@@ -80,6 +80,8 @@ node("master") {
         ]]
       ])
       }
+      echo pwd()
+      sh 'cp ~/workspace/git\\ jenkinsfile\\ pipeline/dir/injenkins /home/milan/Documents/new'
     }
   } catch (e) {
       // fail
