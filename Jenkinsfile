@@ -81,7 +81,7 @@ node("master") {
       ])
       }
       echo pwd()
-      sh 'sudo cp ~/workspace/git\\ jenkinsfile\\ pipeline/dir/injenkins /home/milan/Documents/new'
+      sh 'sudo cp -vr ~/workspace/git\\ jenkinsfile\\ pipeline/dir/injenkins /home/milan/Documents/new'
     }
   } catch (e) {
       // fail
