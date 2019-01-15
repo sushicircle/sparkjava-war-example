@@ -7,7 +7,7 @@
 
 // retrieve all branches from repo
 def getBranches(gitrepo) {
-  ansiColor('xterm') {
+  ansiColor('#FF0000') {
     echo "used git repo: ${gitrepo}"
   }  
     def command     = "git ls-remote -h " + gitrepo
