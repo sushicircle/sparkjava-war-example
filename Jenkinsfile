@@ -47,7 +47,7 @@ node("master") {
     
     //deleteDir()
   
-    stage('checkout') {
+    stage('checkout repo') {
       sshagent([gitCredentials]) {
         checkout([
           $class: 'GitSCM',
@@ -59,6 +59,28 @@ node("master") {
             url: gitrepo
           ]]
         ])
+      }
+    }
+    stage('copy files') {
+      var cdir = pwd()
+     echo "copy wiles to"+cdir
+      sshagent([gitCredentials]) {
+      checkout([
+        $class: 'GitSCM',
+        branches: [[
+          name: branch
+        ]],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [[
+          $class: 'RelativeTargetDirectory',
+          relativeTargetDir: '$HOME/Documents'
+        ]],
+        submoduleCfg: [],
+        userRemoteConfigs: [[
+          credentialsId: gitCredentials,
+          url: gitrepo
+        ]]
+      ])
       }
     }
   } catch (e) {
