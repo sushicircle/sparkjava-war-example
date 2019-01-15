@@ -24,7 +24,7 @@ def getBranches(gitrepo) {
   return branches
 }
 
-node("master) {
+node("master") {
   echo "master node"
   
   stage('checkout') {
