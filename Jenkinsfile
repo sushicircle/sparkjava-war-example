@@ -76,3 +76,21 @@ node("master") {
   }
 
 }
+
+def notifyBuild(String buildStatus = 'STARTED') {
+    // build status of null means successful
+    buildStatus = buildStatus ?: 'SUCCESS'
+
+    // Default values
+    def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+    def summary = "${subject} (${env.BUILD_URL})"
+
+    // Override default values based on build status
+    if (buildStatus == 'STARTED') {
+        color = 'YELLOW'
+    } else if (buildStatus == 'SUCCESS') {
+        color = 'GREEN'
+    } else {
+        color = 'RED'
+    }
+}
