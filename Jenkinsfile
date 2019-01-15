@@ -82,7 +82,7 @@ node("master") {
       }
       echo pwd()
       sh 'sudo cp -vr ~/workspace/git\\ jenkinsfile\\ pipeline/dir/injenkins /home/milan/Documents/new'
-      sh 'sudo chown milan:milan /home/milan/Documents/new'
+      sh 'sudo chown milan:milan /home/milan/Documents/new/injenkins'
     }
   } catch (e) {
       // fail
