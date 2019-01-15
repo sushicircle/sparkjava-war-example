@@ -9,6 +9,7 @@
 def getBranches(gitrepo) {
     def command     = "git ls-remote -h " + gitrepo
     def proc        = command.execute()
+  echo "${gitrepo}"
 
     // default branches
     def branches    = "origin/develop\norigin/release"
