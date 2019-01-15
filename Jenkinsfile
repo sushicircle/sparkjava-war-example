@@ -34,13 +34,6 @@ node("master") {
       ])
     ])
   }
-  try {
-    notifyBuild('START')
-    try {
-      branch = params.build_branch
-    } catch (e) {
-      // do nothing, default to develop
-    }
     
     //deleteDir()
   
@@ -49,7 +42,7 @@ node("master") {
         checkout([
           $class: 'GITSCM',
           branches: [[
-            name: branch
+            name: 'master'
           ]],
           userRemoteConfigs: [[
             credentialsId: gitCredentials,
