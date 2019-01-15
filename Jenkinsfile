@@ -29,5 +29,3 @@ def getBranches(gitrepo) {
   //TODO
     echo "check server config"
   }
-
-}
