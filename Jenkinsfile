@@ -24,8 +24,21 @@ def getBranches(gitrepo) {
   return branches
 }
 
+node("master") {
+  echo "master node"
+  
+  sshagent([gitCredentials]) {
+    properties([
+      paramters([
+        choise(name: 'build_branch', choices: getBranches(gitrepo), description: 'source branceh')
+      ])
+    ])
+  }
+
   
   stage('check') {
   //TODO
     echo "check server config"
   }
+
+}
