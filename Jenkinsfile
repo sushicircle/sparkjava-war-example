@@ -7,9 +7,11 @@
 
 // retrieve all branches from repo
 def getBranches(gitrepo) {
+  ansiColor('xterm') {
+    echo "used git repo: ${gitrepo}"
+  }  
     def command     = "git ls-remote -h " + gitrepo
     def proc        = command.execute()
-  echo "${gitrepo}"
 
     // default branches
     def branches    = "origin/develop\norigin/release"
