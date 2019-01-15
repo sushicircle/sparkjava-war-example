@@ -51,14 +51,7 @@ node("master") {
         ])
       }
     }
-  } catch (e) {
-      // fail
-      currentBuild.result = "FAILED"
-      throw e
-  } finally {
-      // succes or fail, send notifications
-      notifyBuild(currentBuild.result)
-  }
+
   
   stage('check') {
   //TODO
