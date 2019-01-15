@@ -62,8 +62,6 @@ node("master") {
       }
     }
     stage('copy files') {
-      def cdir = pwd()
-     echo "copy wiles to"+cdir
       sshagent([gitCredentials]) {
       checkout([
         $class: 'GitSCM',
