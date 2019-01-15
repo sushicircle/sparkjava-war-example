@@ -5,24 +5,27 @@
   // default branch
   def branches       = 'origin/master'
 
-// retrieve branches
+// retrieve all branches from repo
 def getBranches(gitrepo) {
-  def command   = "git ls-remote -h" + gitrepo
-  def proc      = command.execute()
-  
-  proc.waitFor()
-  
-  if(proc.exitValue() != 0) {
-    println "Error, ${proc.err.txt}"
-  } else {
-    def gitbranches = proc.in.text.readLines().collect {
-      it.replaceAll(/[a-z0-9]*\trefs\/heads\//, '')
+    def command     = "git ls-remote -h " + gitrepo
+    def proc        = command.execute()
+
+    // default branches
+    def branches    = "origin/develop\norigin/release"
+
+    proc.waitFor()
+
+    if ( proc.exitValue() != 0 ) {
+       println "Error, ${proc.err.text}"
+    } else {
+        def gitbranches = proc.in.text.readLines().collect {
+            it.replaceAll(/[a-z0-9]*\trefs\/heads\//, '')
+        }
+        branches = gitbranches.join("\n")
     }
-    branches = gitbranches.join("\n")
-  }
-  println branches
-  return branches
+    return branches
 }
+
 
 node("master") {
   echo "master node"
@@ -30,10 +33,17 @@ node("master") {
   sshagent([gitCredentials]) {
     properties([
       parameters([
-        choice(name: 'build_branch', choices: 'master\ndevelop', description: 'source branceh')
+        choice(name: 'build_branch', choices: getBranches(gitrepo), description: 'source branceh')
       ])
     ])
   }
+  try {
+    notifyBuild('START')
+    try {
+      branch = params.build_branch
+    } catch (e) {
+      // do nothing, default to develop
+    }
     
     //deleteDir()
   
@@ -42,7 +52,7 @@ node("master") {
         checkout([
           $class: 'GitSCM',
           branches: [[
-            name: 'master'
+            name: branch
           ]],
           userRemoteConfigs: [[
             credentialsId: gitCredentials,
@@ -51,7 +61,14 @@ node("master") {
         ])
       }
     }
-
+  } catch (e) {
+      // fail
+      currentBuild.result = "FAILED"
+      throw e
+  } finally {
+      // succes or fail, send notifications
+      notifyBuild(currentBuild.result)
+  }
   
   stage('check') {
   //TODO
