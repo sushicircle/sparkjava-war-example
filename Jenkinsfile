@@ -80,7 +80,9 @@ node("master") {
         ]]
       ])
       }
-      echo pwd()
+      echo "workspace dir is ${WORKSPACE}"
+      def PWD = pwd()
+      echo "pwd is ${PWD}"
       sh 'sudo cp -vr ~/workspace/git\\ jenkinsfile\\ pipeline/dir/injenkins /home/milan/Documents/new'
       sh 'sudo chown milan:milan /home/milan/Documents/new/injenkins'
     }
