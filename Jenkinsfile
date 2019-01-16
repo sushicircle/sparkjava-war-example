@@ -54,9 +54,7 @@ node("master") {
     ansiColor('xterm') {
       echo "\033[31mbranch: ${branch}"
     }  
-    //deleteDir()
-    if (job.hasParameters(['first])) {
-                           
+    //deleteDir()                        
                            
     stage('checkout repo') {
       sshagent([gitCredentials]) {
@@ -114,7 +112,7 @@ node("master") {
     echo "check server config"
   }
 
-}
+
 
 def notifyBuild(String buildStatus = 'STARTED') {
     // build status of null means successful
