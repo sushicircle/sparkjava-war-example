@@ -55,7 +55,7 @@ node("master") {
       echo "\033[31mbranch: ${branch}"
     }  
     //deleteDir()
-    if (job.hasParameters(['first]) {
+    if (job.hasParameters(['first])) {
                            
                            
     stage('checkout repo') {
