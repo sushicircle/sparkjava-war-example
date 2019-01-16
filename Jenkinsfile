@@ -55,7 +55,9 @@ node("master") {
       echo "\033[31mbranch: ${branch}"
     }  
     //deleteDir()
-  
+    if (job.hasParameters(['first]) {
+                           
+                           
     stage('checkout repo') {
       sshagent([gitCredentials]) {
         checkout([
@@ -106,7 +108,7 @@ node("master") {
         // Success or failure, always send notifications
         notifyBuild(currentBuild.result)
     }
-  
+ }
   stage('check') {
   //TODO
     echo "check server config"
